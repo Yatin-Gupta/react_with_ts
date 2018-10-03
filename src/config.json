@@ -1,3 +1,3 @@
 {
-  "userApiEndpoint": "http://172.16.2.194:8080/api/vendors"
+  "userApiEndpoint": "http://IP:8080/api/vendors"
 }
