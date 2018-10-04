@@ -1,15 +1,17 @@
 import * as React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 // import components
 
 // import UserListComponent from "./components/UserListComponent";
 // import LoginComponent from "./components/LoginComponent";
-import RegisterComponent from "./components/RegisterComponent";
+import Register from "./components/RegisterComponent";
+import Login from "./components/LoginComponent";
+import UserList from "./components/UserListComponent";
 
 // import common components
-import NavbarComponent from "./components/common/NavbarComponent";
-//import DeleteComponent from "./components/common/DeleteComponent";
+import Navbar from "./components/common/NavbarComponent";
+import Delete from "./components/common/DeleteComponent";
 
 // import models
 import { LinkType } from "./models/navbar";
@@ -38,13 +40,13 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <div className="container">
-          <NavbarComponent loggedIn={true} links={this.getNavigationLinks()} />
+          <Navbar loggedIn={true} links={this.getNavigationLinks()} />
           <Switch>
             <Route
               path="/register"
               exact
               render={props => (
-                <RegisterComponent
+                <Register
                   {...props}
                   isEdit={false}
                   addUser={userService.addNewUser}
@@ -55,7 +57,7 @@ class App extends React.Component {
               path="/users/edit/:id"
               exact
               render={props => (
-                <RegisterComponent
+                <Register
                   {...props}
                   isEdit={true}
                   getUser={userService.getUserById}
@@ -63,6 +65,26 @@ class App extends React.Component {
                 />
               )}
             />
+            <Route
+              path="/users/delete/:id"
+              exact
+              render={props => (
+                <Delete {...props} deleteItem={userService.deleteItem} />
+              )}
+            />
+            <Route
+              path="/user-details"
+              render={props => (
+                <UserList
+                  {...props}
+                  // @ts-ignore
+                  users={userService.getAllUsers}
+                  loggedIn={true}
+                />
+              )}
+            />
+            <Route path="/login" exact render={props => <Login {...props} />} />
+            <Redirect to="/user-details" from="/" exact />
           </Switch>
         </div>
       </React.Fragment>

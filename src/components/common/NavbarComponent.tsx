@@ -12,7 +12,7 @@ interface NavbarProps {
   loggedIn: boolean;
 }
 
-class NavbarComponent extends React.Component<NavbarProps, NavbarState> {
+class Navbar extends React.Component<NavbarProps, NavbarState> {
   public state: NavbarState;
 
   public static defaultProps: Partial<NavbarProps> = {
@@ -49,4 +49,4 @@ class NavbarComponent extends React.Component<NavbarProps, NavbarState> {
   }
 }
 
-export default NavbarComponent;
+export default Navbar;

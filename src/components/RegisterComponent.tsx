@@ -61,9 +61,8 @@ class Register extends React.Component<RegisterProps, RegisterState> {
       .min(4)
       .required()
       .label("Password"),
-    status: Joi.number()
-      .integer()
-      .valid(0, 1)
+    status: Joi.string()
+      .valid("0", "1")
       .required(),
     company_name: Joi.string().required(),
     company_desc: Joi.string().required(),
@@ -166,7 +165,8 @@ class Register extends React.Component<RegisterProps, RegisterState> {
     }
     // call to server made
 
-    window.location.href = "/";
+    //window.location.href = "/";
+    this.props.history.push("/");
   };
 
   render() {
